@@ -39,8 +39,9 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: [
             const DateSelector(),
-            FutureBuilder(
-              future: FirebaseFirestore.instance.collection("tasks").get(),
+            StreamBuilder(
+              stream:
+                  FirebaseFirestore.instance.collection("tasks").snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(
